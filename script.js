@@ -48,11 +48,24 @@ const fetchSinglePlayer = async (playerId) => {
 
 const addNewPlayer = async (playerObj) => {
     try {
+        const response = await fetch(`${APIURL}/players`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify(playerObj)
+        })
+        const newPlayer = await response.json()
+        return newPlayer
 
     } catch (err) {
         console.error('Oops, something went wrong with adding that player!', err);
     }
 };
+
+
+
 
 const removePlayer = async (playerId) => {
     try {
@@ -143,11 +156,46 @@ const renderAllPlayers = async (players) => {
  */
 const renderNewPlayerForm = () => {
     try {
+        const newPlayerFormContainer = document.getElementById('new-player-form');
+        const form = document.createElement('form');
+
+        form.innerHTML = `<label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+        <label for='breed'>Breed:</label>
+        <input name='breed' id='breed' type='text'/>
+        <label for="imageUrl">Image URL</label>
+        <input type="url" name="imageUrl" id="imageUrl" />
+        <button type="submit">Add Puppy</button>`;
+
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault()
+            const name = document.getElementById('name').value
+            const breed=document.getElementById('breed').value
+            const imageUrl = document.getElementById('imageUrl').value
+
+            const newPlayer = {
+                name,
+                breed,
+                imageUrl,
+
+
+            }
+            await addNewPlayer(newPlayer)
+            playerContainer.innerHTML='';
+            const updatedPlayers = await fetchAllPlayers();
+            return renderAllPlayers(updatedPlayers);
+        });
+
+        newPlayerFormContainer.appendChild(form);
+
         
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
 }
+
+
 
 const init = async () => {
     const players = await fetchAllPlayers();
