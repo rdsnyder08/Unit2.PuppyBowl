@@ -57,7 +57,7 @@ const addNewPlayer = async (playerObj) => {
 const removePlayer = async (playerId) => {
     try {
         const response = await fetch(`${APIURL}/players/${playerId}`, {method: 'DELETE'})
-        const data = await response.json
+        const data = await response.json();
         console.log('Deleted',data)
 
     } catch (err) {
@@ -109,9 +109,17 @@ const renderAllPlayers = async (players) => {
 
                 playerCard.removeChild(detsBtn);
                 
-        });
+            });
+            const deleteButton = document.createElement('button')
+            deleteButton.innerText='Remove Puppy'
+            deleteButton.addEventListener('click', async () => {
+                await removePlayer(player.id)
+                playerContainer.removeChild(playerCard)
+            })
+
 
         playerCard.appendChild(detsBtn);
+        playerCard.appendChild(deleteButton);
 
         playerContainer.appendChild(playerCard);
     });
