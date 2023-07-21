@@ -16,12 +16,10 @@ section {
 
 }
 #new-player-form {
-  display: flex;
-  flex-direction: row;
   background-color: azure;
   border: 5px solid darkgrey;
   border-radius: 6px;
-  height: 20vh;
+  height: 25vh;
   flex-wrap: wrap;
 }
 
@@ -55,4 +53,27 @@ img {
   background-color:rgb(227, 205, 227);
   border: 5px solid darkgrey;
   border-radius: 6px;
+}
+
+label {
+  display: block;
+  font-weight:bolder;
+  
+  
+}
+
+input[type='text']{
+  display: inline-block;
+  width: 30%
+}
+
+input[type='url']{
+  display: inline-block;
+  width: 60%;
+
+}
+
+button[type="submit"] {
+  display: block;
+  
 }

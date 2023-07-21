@@ -159,11 +159,11 @@ const renderNewPlayerForm = () => {
         const newPlayerFormContainer = document.getElementById('new-player-form');
         const form = document.createElement('form');
 
-        form.innerHTML = `<label for="name">Name</label>
+        form.innerHTML = `<label for="name">Name:</label>
         <input type="text" name="name" id="name" />
         <label for='breed'>Breed:</label>
         <input name='breed' id='breed' type='text'/>
-        <label for="imageUrl">Image URL</label>
+        <label for="imageUrl">Image URL:</label>
         <input type="url" name="imageUrl" id="imageUrl" />
         <button type="submit">Add Puppy</button>`;
 
